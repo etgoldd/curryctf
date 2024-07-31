@@ -1,0 +1,3 @@
+/home/mrsandman/mystuff/arazim/curryctf/cmake-build-debug/CMakeFiles/MyProject.dir
+/home/mrsandman/mystuff/arazim/curryctf/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/mrsandman/mystuff/arazim/curryctf/cmake-build-debug/CMakeFiles/rebuild_cache.dir
