@@ -6,7 +6,8 @@
 
 using namespace std;
 int main(int argc, char *argv[]) {
-    return 0;
+    get_input();
+    exit(0);
 }
 
 void get_input() {
