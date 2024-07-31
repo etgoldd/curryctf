@@ -55,6 +55,12 @@ build CMakeFiles/MyProject.dir/main.cpp.o: CXX_COMPILER__MyProject_unscanned_Deb
   OBJECT_DIR = CMakeFiles/MyProject.dir
   OBJECT_FILE_DIR = CMakeFiles/MyProject.dir
 
+build CMakeFiles/MyProject.dir/you_will_never_sol.c.o: C_COMPILER__MyProject_unscanned_Debug /home/mrsandman/mystuff/arazim/curryctf/you_will_never_sol.c || cmake_object_order_depends_target_MyProject
+  DEP_FILE = CMakeFiles/MyProject.dir/you_will_never_sol.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/MyProject.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyProject.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target MyProject
@@ -63,7 +69,7 @@ build CMakeFiles/MyProject.dir/main.cpp.o: CXX_COMPILER__MyProject_unscanned_Deb
 #############################################
 # Link the executable MyProject
 
-build MyProject: CXX_EXECUTABLE_LINKER__MyProject_Debug CMakeFiles/MyProject.dir/main.cpp.o
+build MyProject: CXX_EXECUTABLE_LINKER__MyProject_Debug CMakeFiles/MyProject.dir/main.cpp.o CMakeFiles/MyProject.dir/you_will_never_sol.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/MyProject.dir
   POST_BUILD = :
