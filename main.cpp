@@ -11,7 +11,34 @@ int main(int argc, char *argv[]) {
 void get_input() {
     while (true) {
         string input;
-        if (input == "nothing")
+        if (input == "nothing") {
+            nothing();
+        }
+        else if (input == "open_file") {
+            string filename;
+            open_file(filename);
+        }
+        else if (input == "add_numbers") {
+            int a, b;
+            add_numbers(a, b);
+        }
+        else if (input == "time") {
+            time();
+        }
+        else if (input == "ping") {
+            ping();
+        }
+        else if (input == "write_file") {
+            string filename, content;
+            write_file(filename, content);
+        }
+        else if (input == "ls") {
+            string dirname;
+            run_ls(dirname);
+        }
+        else {
+            cout << "Invalid command" << endl;
+        }
     }
 }
 
