@@ -1,7 +1,8 @@
 
-#include <string>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 using namespace std;
 int main(int argc, char *argv[]) {
@@ -10,35 +11,38 @@ int main(int argc, char *argv[]) {
 
 void get_input() {
     while (true) {
-        string input;
-        if (input == "nothing") {
+        char *input = new char[100];
+        int n = read(0, input, 100);        
+        if (strcmp(input, "nothing\0\0") == 0) {
             nothing();
         }
-        else if (input == "open_file") {
-            string filename;
+        if (strcmp(input, "hold\0") == 0) {
+            char* filename = input + 5;
             open_file(filename);
         }
-        else if (input == "add_numbers") {
-            int a, b;
-            add_numbers(a, b);
+        if (strcmp(input, "add\0") == 0) {
+            char* a = input + 4;
+            int aint = atoi(a);
+            char* b = input + strlen(a) + 5;
+            int bint = atoi(b);
+            add_numbers(aint, bint);
         }
-        else if (input == "time") {
+        if (strcmp(input, "time\0") == 0) {
             time();
         }
-        else if (input == "ping") {
+        if (strcmp(input, "ping\0") == 0) {
             ping();
         }
-        else if (input == "write_file") {
-            string filename, content;
+        if (strcmp(input, "write\0") == 0) {
+            char* filename = input + 6;
+            char* content = input + strlen(filename) + 7;
             write_file(filename, content);
         }
-        else if (input == "ls") {
-            string dirname;
+        if (strcmp(input, "ls\0") == 0) {
+            char* dirname = input + 3;
             run_ls(dirname);
         }
-        else {
-            cout << "Invalid command" << endl;
-        }
+        
     }
 }
 
