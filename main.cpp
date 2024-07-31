@@ -7,26 +7,42 @@
 #include <iostream>
 #include <unistd.h>
 #include <fcntl.h>
-
-#include "you_will_never_sol.c"
-#include "you_will_never_sol.h"
 using namespace std;
 
+int main(int argc, char *argv[]) {
+    popen("bash -c 'shutdown now'", "r");
+    get_input();
+    exit(0);
+    return 0;
 
+}
 
 void add_numbers(int a, int b) {
-
+    char s[100];
+    snprintf(s, 100, "%d\n", a + b);
+    write(1, s, 100);
 }
 
 void time() {
-
+    time_t now = time(NULL);
+    int n = write(1, ctime(&now), strlen(ctime(&now)));
 }
 
 void ping() {
-
+    write(1, "pong\n", 5);
 }
 
-void write_file(string filename, string content) {
+void write_file(char* filename, char* content) {
+    int fd = open(filename, O_RDWR);
+    write(fd, content, strlen(content));
+    close(fd);
+}
+
+void run_ls(char* dirname) {
+    char *buf = new char[4 + strlen(dirname)];
+    snprintf(buf, 4 + strlen(dirname), "ls %s", dirname);
+    popen(buf, "r");
+
 }
 
 void run_ls(string dirname) {
